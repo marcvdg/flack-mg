@@ -1,30 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Flack</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
+    <!-- Custom css -->
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
   </head>
-
   <body>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">Flack</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-          </ul>
+    <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark danger-color">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand font-weight-bold" href="{{url_for('index')}}"><i class="fas fa-teeth-open"></i>&nbsp; FLACK</a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <!-- TODO: fix active page style -->
+    {% set active_page = active_page %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item  {% if active_page == 'index' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('index') }}">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      {% if 'username' in session %}
+      <li class="nav-item {% if active_page == 'welcome' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('welcome') }}">Change name</a>
+      </li>
+    </ul>
+    <form class="form-inline" action="{{ url_for('userhome') }}" method="POST">
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" name="rr_topsearch" placeholder="ISBN, title or author" aria-label="Search">
+
+      </div>
+    </form>
+      
+    {% else %}
+    <li class="nav-item {% if active_page == 'welcome' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('welcome') }}">Change name</a>
+      </li>
+    </ul>
+    {% endif %}
+  
+  <!-- Collapsible content -->
+  </div>
+</nav>
+<!--/.Navbar-->
+      <main class="mdl-layout__content">
+        <div class="page-content"><!-- Your content goes here -->
+    {% block body %}
+    {% endblock %}
+        </div> 
+      </main>
+    
+      <!-- Footer -->
+      <!-- <footer class="page-footer font-small blue">
+
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+          <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
         </div>
-      </nav>
-      {% block body %}
-      {% endblock %}
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+      </footer> -->
+
+    </div>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
   </body>
 </html>
-      

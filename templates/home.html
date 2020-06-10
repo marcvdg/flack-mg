@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% set active_page = "index" %}
+    <div class="container">
+        <ul id="navigation">
+            {% for item in navigation %}
+                <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+            {% endfor %}
+            </ul>
+    </div>
+{% endblock %}
