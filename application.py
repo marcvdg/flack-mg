@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -60,10 +60,12 @@ def welcome():
 @app.route("/namecheck", methods=["POST"])
 def namecheck():
     username = request.form.get("username")
+    print(username)
+    print(users)
     if username in users:
         return jsonify({"success": False})
-
-    return jsonify({"success": True, "username": username})
+    users.append(username)
+    return jsonify({"success": True, "username": username, "path": url_for('home')})
 
 
 #TODO: create homepage, give list of rooms, give option to create new room
