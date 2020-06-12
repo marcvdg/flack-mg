@@ -1,6 +1,6 @@
 import os, datetime
 
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -27,6 +27,9 @@ class Message:
 #Global variables:
 users = []
 channels_dict = {}
+
+test_channel = Channel("Test", [])
+channels_dict["Test"] = test_channel
 
 
 #TODO: Check if localstorage has username, if so channels, if not name
@@ -58,11 +61,9 @@ def channelcheck():
 
 @app.route("/messageadd", methods=["POST"])
 def messageadd():
-    now = datetime.datetime.now()
-    nowstring = now.strftime("%m/%d/%Y, %H:%M:%S")
-    nw_msg = Message(nowstring,request.form.get("user"), request.form.get("message"))
+    now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    nw_msg = Message(now,request.form.get("user"), request.form.get("message"))
     current = request.form.get("channel")
-    print(nw_msg.output)
     channels_dict[current].messages.append(nw_msg) #if > 100, pop 1
     return jsonify({"success": True, "message": nw_msg.output})
 
@@ -74,6 +75,20 @@ def channels():
 #TODO: create chatroom page, display latest 100 messages, offer form to type new message 
 @app.route("/messages/<name>")
 def messages(name):
-    channel = channels_dict[name]
-    print(channel.messages)
+    try:
+        channel = channels_dict[name]
+    except: 
+        return redirect(url_for('channels'))
     return render_template("messages.html", channel = channel)
+
+@socketio.on("send message")
+def send(data):
+    now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    nw_msg = Message(now, data["user"], data["message"])
+    current = data["channel"]
+    msg_list = channels_dict[current].messages
+    msg_list.append(nw_msg)
+    if len(msg_list) > 5:
+        msg_list.pop(0)
+    msg_output = nw_msg.output
+    emit("new message", msg_output, broadcast=True)

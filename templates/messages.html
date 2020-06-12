@@ -3,23 +3,23 @@
 {% block body %}
 {% set active_page = "index" %}
     <div class="container">
-        <h1 id="channelname">{{ channel.name }}</h1>
+        <h1 id="channelname" class="mt-5">{{ channel.name }}</h1>
         
-        <form id="messageform" class="md-form" name="signup">
+        <div id="messageform" class="md-form">
             <div id="message_warning"></div>
             <div class="md-form">
                 <input type="text" id="messagefield" class="form-control">
                 <label for="messagefield">Your message:</label>
             </div>
-            <button class="btn btn-outline-danger btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Send</button>
-        </form>
+            <button id="msg_send" class="btn btn-outline-danger btn-rounded btn-block my-4 waves-effect z-depth-0">Send</button>
+        </div>
     
         <h1>The conversation so far</h1>
-        <ul id="messages">
+        <div id="messages">
             {% for message in channel.messages %}
                 <p>{{ message.output }}</p>
             {% endfor %}
-        </ul>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='messages.js') }}"></script>
   

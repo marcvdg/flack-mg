@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Flack</title>
+    <!-- Socket.io -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -40,24 +42,14 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      {% if 'username' in session %}
       <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
         <a class="nav-link" href="{{url_for('name') }}">Change name</a>
       </li>
-    </ul>
-    <form class="form-inline" action="{{ url_for('userhome') }}" method="POST">
-      <div class="md-form my-0">
-        <input class="form-control mr-sm-2" type="text" name="rr_topsearch" placeholder="ISBN, title or author" aria-label="Search">
-
-      </div>
-    </form>
-      
-    {% else %}
-    <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
-        <a class="nav-link" href="{{url_for('name') }}">Change name</a>
+      <li class="nav-item {% if active_page == 'channels' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('channels') }}">Channels</a>
       </li>
     </ul>
-    {% endif %}
+
   
   <!-- Collapsible content -->
   </div>

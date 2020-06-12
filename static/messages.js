@@ -1,48 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Get channel name from h1
     const current_channel = document.querySelector("#channelname").innerHTML
     localStorage.setItem('channel', current_channel)
-    document.querySelector('#messageform').onsubmit = () => {
 
-        // Initialize new request
-        const msg_text = document.querySelector('#messagefield').value;
+    // Connect to websocket
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-        if (msg_text == "") {
-            
-            document.querySelector('#message_warning').innerHTML = "Please type something :)"
-            
-        } 
-        else {
-            const request = new XMLHttpRequest();
-            request.open('POST', '/messageadd');
-
-            request.onload = () => {
-
-                const data = JSON.parse(request.responseText);
-                console.log(data)
-                if (data.success) {
-                    console.log("ok")
-                    document.querySelector('#message_warning').innerHTML = "Sent!"
-                    return false;
-                }
-                else {
-                    document.querySelector('#message_warning').innerHTML = "Oh no, ERROR! :("
-                    return false;
-                }
-                
+    // When connected, configure button
+    socket.on('connect', () => {
+        
+        document.querySelector('#msg_send').onclick = () => {
+            const msg_text = document.querySelector('#messagefield').value;
+            console.log(msg_text)
+            if (msg_text == "") {
+                document.querySelector('#message_warning').innerHTML = "Please type something :)"
+            } 
+            else {                 
+                socket.emit('send message', {'message': msg_text, 'user': localStorage.getItem('username'), 'channel': current_channel});
             }
-
-            // Add data to send with request
-            const data = new FormData();
-            data.append('message', msg_text);
-            data.append('user', localStorage.getItem('username'))
-            data.append('channel', current_channel)
-            
-
-            // Send request
-            request.send(data);
-            return false;
         }
-    };
+        
+    })
 
-});
+    socket.on('new message', data => {
+        if (current_channel ==  current_channel) {
+            const msg_html = "<p>" + data + "</p>"
+            document.querySelector('#messages').insertAdjacentHTML('beforeend', msg_html) 
+        }
+    })
+})

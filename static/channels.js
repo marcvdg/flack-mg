@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (ch_name == "") {
             document.querySelector('#channel_warning').innerHTML = "Please type something :)"
-            
+            return false;
         } 
         
         else {
