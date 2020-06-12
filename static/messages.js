@@ -12,17 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     messagefield.addEventListener("keyup", function(event) {
 
-    //scroll down if needed
-    // function updateScroll(){
-    //     msg_box.scrollTop = msg_box.scrollHeight;
-    // }
-    // updateScroll()
-
     if (event.keyCode === 13) {
         event.preventDefault();
         msg_send.click();
     }
     });
+
+    //scroll down if needed
+    function updateScroll(){
+        msg_box.scrollTop = msg_box.scrollHeight;
+        console.log("SCROLL!")
+    }
+    
+    updateScroll();
 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.ch ==  current_channel) {
             const msg_html = "<p>" + data.msg + "</p>"
             document.querySelector('#messages').insertAdjacentHTML('beforeend', msg_html) 
-            // updateScroll()
+            updateScroll()
         }
     })
 })

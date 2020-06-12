@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href="/messages/" + channel
     } 
     else {
-        window.location.href="/channels/" 
+        window.location.href="/channels" 
     }
 })

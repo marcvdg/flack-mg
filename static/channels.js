@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    document.querySelector('#username').innerHTML = 'Hi ' + localStorage.getItem('username') + '! '
+
+    const username = localStorage.getItem('username')
+    if (username === null) {
+        window.location.href="/name"
+    }
+
+    document.querySelector('#username').innerHTML = 'Hi ' + username + '! '
     document.querySelector('#channelform').onsubmit = () => {
 
         // Initialize new request
