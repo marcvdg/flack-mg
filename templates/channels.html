@@ -3,7 +3,7 @@
 {% block body %}
 {% set active_page = "index" %}
     <div class="container">
-        <h1><span id="username"> </span>Add a new channel...</h1>
+        <h1 class="mt-5"><span id="username"> </span>Add a new channel...</h1>
         
         <form id="channelform" class="md-form" name="signup">
             <div id="channel_warning"></div>
@@ -14,7 +14,7 @@
             <button class="btn btn-outline-danger btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Create channel</button>
         </form>
     
-        <h1>Or choose an existing one!</h1>
+        <h2 class="my-3">..or choose an existing one!</h2>
         <ul id="channels">
             {% for k,v in channels_dict.items() %}
                 <li><a href="{{ url_for('messages', name=v.name) }}">{{ v.name }}</a></li>

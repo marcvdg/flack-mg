@@ -88,7 +88,7 @@ def send(data):
     current = data["channel"]
     msg_list = channels_dict[current].messages
     msg_list.append(nw_msg)
-    if len(msg_list) > 5:
+    if len(msg_list) > 100:
         msg_list.pop(0)
     msg_output = nw_msg.output
-    emit("new message", msg_output, broadcast=True)
+    emit("new message", {'msg': nw_msg.output, 'ch': current}, broadcast=True)

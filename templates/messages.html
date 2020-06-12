@@ -8,13 +8,13 @@
         <div id="messageform" class="md-form">
             <div id="message_warning"></div>
             <div class="md-form">
-                <input type="text" id="messagefield" class="form-control">
-                <label for="messagefield">Your message:</label>
+                <input type="text" autofocus id="messagefield" class="form-control">
+                <label for="messagefield">Your message</label>
             </div>
             <button id="msg_send" class="btn btn-outline-danger btn-rounded btn-block my-4 waves-effect z-depth-0">Send</button>
         </div>
     
-        <h1>The conversation so far</h1>
+        <h2 class="my-4">The conversation so far:</h2>
         <div id="messages">
             {% for message in channel.messages %}
                 <p>{{ message.output }}</p>

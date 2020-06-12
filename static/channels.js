@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = JSON.parse(request.responseText);
                 console.log(data)
                 if (data.success) {
-                    return false;
+                    location.reload()
                 }
                 else {
                     document.querySelector('#channel_warning').innerHTML = "Oh no, that name's taken! :("
