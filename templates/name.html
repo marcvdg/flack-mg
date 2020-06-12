@@ -20,9 +20,9 @@
           </h5>
           <div class="card-body px-lg-5 pt-0">
               <form id="nameform" class="md-form" name="signup">
-                <div id="welcome_warning"></div>
+                <div id="name_warning"></div>
                 <div class="md-form">
-                  <input type="text" id="namefield" name="namefield" class="form-control">
+                  <input type="text" id="namefield" class="form-control">
                   <label for="namefield">User name</label>
                 </div>
                 <button class="btn btn-outline-danger btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">That's my name!</button>
@@ -32,4 +32,5 @@
       </div>
     </div>
   </div>
+  <script src="{{ url_for('static', filename='name.js') }}"></script>
 {% endblock %}

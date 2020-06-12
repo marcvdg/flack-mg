@@ -41,8 +41,8 @@
         </a>
       </li>
       {% if 'username' in session %}
-      <li class="nav-item {% if active_page == 'welcome' %}active{% endif %}">
-        <a class="nav-link" href="{{url_for('welcome') }}">Change name</a>
+      <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('name') }}">Change name</a>
       </li>
     </ul>
     <form class="form-inline" action="{{ url_for('userhome') }}" method="POST">
@@ -53,8 +53,8 @@
     </form>
       
     {% else %}
-    <li class="nav-item {% if active_page == 'welcome' %}active{% endif %}">
-        <a class="nav-link" href="{{url_for('welcome') }}">Change name</a>
+    <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('name') }}">Change name</a>
       </li>
     </ul>
     {% endif %}
