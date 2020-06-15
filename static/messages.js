@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    const username = localStorage.getItem('username')
+    if (username === null) {
+        window.location.href="/name"
+    }
     
     // Get channel name from h1
     const current_channel = document.querySelector("#channelname").innerHTML
     localStorage.setItem('channel', current_channel)
 
-    //link Enter key to field
+    // Link Enter key to submit button
     const messagefield = document.querySelector('#messagefield');
     const msg_send = document.querySelector('#msg_send');
     const msg_warning = document.querySelector('#message_warning');
@@ -18,13 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     });
 
-    //scroll down if needed
+    // Scroll down if needed
     function updateScroll(){
         msg_box.scrollTop = msg_box.scrollHeight;
-        console.log("SCROLL!")
     }
-    
     updateScroll();
+
+    // Remove message on click
+    document.querySelectorAll('.chatremove').forEach(button => {
+        button.onclick = () => {
+            element.parentElement.remove();
+        };
+    });
 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);

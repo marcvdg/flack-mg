@@ -17,7 +17,7 @@
         <h2 class="my-4">The conversation so far:</h2>
         <div id="messages">
             {% for message in channel.messages %}
-                <p>{{ message.output }}</p>
+                <p class="chatmsg">{{ message.output }}<i class="fas fa-times chatremove"></i></p>
             {% endfor %}
         </div>
     </div>
