@@ -1,1 +1,1 @@
-web: gunicorn application:flack-mg
+web: gunicorn main:application
