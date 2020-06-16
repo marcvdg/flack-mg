@@ -21,8 +21,9 @@
     display: none
 }
 
-.chatmsg:hover .chatremove {
+.chatmsg:hover .chatremove.active {
     display: block; 
     color: #ccc;
     cursor: pointer;
 }
+
