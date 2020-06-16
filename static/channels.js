@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             request.onload = () => {
 
                 const data = JSON.parse(request.responseText);
-                console.log(data)
                 if (data.success) {
                     location.reload()
                 }
