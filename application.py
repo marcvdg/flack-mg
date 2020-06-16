@@ -46,15 +46,6 @@ def channelcheck():
     channels_dict[ch_new.name] = ch_new
     return jsonify({"success": True, "name": ch_new.name, "path": url_for('channels')})
 
-# OBSOLETE Get message text and broadcast it with timestamp and user
-# @app.route("/messageadd", methods=["POST"])
-# def messageadd():
-#     now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-#     nw_msg = Message(now,request.form.get("user"), request.form.get("message"))
-#     current = request.form.get("channel")
-#     channels_dict[current].messages.append(nw_msg) #if > 100, pop 1
-#     return jsonify({"success": True, "message": nw_msg.output})
-
 # Channels page: offer list of rooms, give option to create new room
 @app.route("/channels")
 def channels():
