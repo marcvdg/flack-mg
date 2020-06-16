@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    document.querySelector('#username').innerHTML = 'Hi ' + localStorage.getItem('username') + '! '
+
+    const username = localStorage.getItem('username')
+    if (username === null) {
+        window.location.href="/name"
+    }
+
+    document.querySelector('#username').innerHTML = 'Hi ' + username + '! '
     document.querySelector('#channelform').onsubmit = () => {
 
         // Initialize new request
@@ -8,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (ch_name == "") {
             document.querySelector('#channel_warning').innerHTML = "Please type something :)"
-            
+            return false;
         } 
         
         else {
@@ -18,9 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             request.onload = () => {
 
                 const data = JSON.parse(request.responseText);
-                console.log(data)
                 if (data.success) {
-                    return false;
+                    location.reload()
                 }
                 else {
                     document.querySelector('#channel_warning').innerHTML = "Oh no, that name's taken! :("

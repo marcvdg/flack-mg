@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Flack</title>
+    <!-- Socket.io -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -20,7 +22,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark danger-color">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand font-weight-bold" href="{{url_for('index')}}"><i class="fas fa-teeth-open"></i>&nbsp; FLACK</a>
+  <a class="navbar-brand font-weight-bold" href="{{url_for('channels')}}"><i class="fas fa-teeth-open"></i>&nbsp; FLACK</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -35,29 +37,13 @@
     <!-- TODO: fix active page style -->
     {% set active_page = active_page %}
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item  {% if active_page == 'index' %}active{% endif %}">
-        <a class="nav-link" href="{{url_for('index') }}">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      {% if 'username' in session %}
       <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
         <a class="nav-link" href="{{url_for('name') }}">Change name</a>
       </li>
-    </ul>
-    <form class="form-inline" action="{{ url_for('userhome') }}" method="POST">
-      <div class="md-form my-0">
-        <input class="form-control mr-sm-2" type="text" name="rr_topsearch" placeholder="ISBN, title or author" aria-label="Search">
-
-      </div>
-    </form>
-      
-    {% else %}
-    <li class="nav-item {% if active_page == 'name' %}active{% endif %}">
-        <a class="nav-link" href="{{url_for('name') }}">Change name</a>
+      <li class="nav-item {% if active_page == 'channels' %}active{% endif %}">
+        <a class="nav-link" href="{{url_for('channels') }}">Channels</a>
       </li>
     </ul>
-    {% endif %}
   
   <!-- Collapsible content -->
   </div>
@@ -70,15 +56,6 @@
         </div> 
       </main>
     
-      <!-- Footer -->
-      <!-- <footer class="page-footer font-small blue">
-
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-          <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-        </div>
-
-      </footer> -->
-
     </div>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -1,16 +1,29 @@
-html,
-body,
-.login-box,
-.card-content {
-    height: 100%;
+#messages {
+    border: 1px solid #ccc ;
+    height: 400px;
+    overflow: auto;
+    padding: 1em;
 }
 
-/* label underline focus color */
-.input-field input[type=text]:focus {
-border-bottom: 1px solid #333;
-box-shadow: 0 1px 0 0 #000;
+.chatmsg {
+    position: relative;
+    margin-bottom: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
-#login-button {
-    color: white;
+.chatmsg .chatremove {
+    position: absolute;
+    padding: 0.5em;
+    top: 0em;
+    bottom: 0;
+    right: 0;
+    display: none
 }
+
+.chatmsg:hover .chatremove.active {
+    display: block; 
+    color: #ccc;
+    cursor: pointer;
+}
+
